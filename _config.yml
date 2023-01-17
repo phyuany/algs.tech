@@ -10,40 +10,40 @@ baseurl: ''
 # The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
 # If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
 # otherwise, the layout language will use the default value of 'en'.
-lang: en
+lang: zh-CN
 
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone:
+timezone: Asia/Shanghai
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy                          # the main title
+title: 极客开发者博客                          # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+tagline: 用一种便利与无偿的方式分享开发技术   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, responsive, and powerful Jekyll theme for presenting professional writing.
+  我一直认为，自己是一个热爱技术，走在技术成长之路上的人，在这条路上，我遇到过很多启发和见解，它们就像来自四面八方的光，给人以启迪。而我，借由成长阅历也沉淀出自己对技术的观点，并愿意给大家分享。我希望搭建这样一个平台，用一种便利、无偿的方式，表达它们。我希望把我所知道的和我想说的都分享给大家。我想很务实、很负责、也很有兴趣地分享技术知识和职业心得。我相信，助人者自助。
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: ''
 
 github:
-  username: github_username             # change to your github username
+  username: jikerdev             # change to your github username
 
 twitter:
-  username: twitter_username            # change to your twitter username
+  username: panhongyuan            # change to your twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@domain.com             # change to your email address
+  name: jiker.dev
+  email: phy.xyz@foxmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/username       # change to your github homepage
+    - https://www.jkdev.cn      # change to your twitter homepage
+    - https://space.bilibili.com/172353353       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
@@ -81,7 +81,7 @@ theme_mode:   # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://jiker.dev/images/avatar.jpeg
 
 # boolean type, the global switch for ToC in posts.
 toc: true
