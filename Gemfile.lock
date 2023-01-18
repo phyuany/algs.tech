@@ -13,6 +13,7 @@ GEM
     eventmachine (1.2.7)
     ffi (1.15.5)
     forwardable-extended (2.6.0)
+    google-protobuf (3.21.12-x86_64-darwin)
     google-protobuf (3.21.12-x86_64-linux)
     html-proofer (3.19.4)
       addressable (~> 2.3)
@@ -70,6 +71,8 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.4.0)
+    nokogiri (1.14.0-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.14.0-x86_64-linux)
       racc (~> 1.4)
     parallel (1.22.1)
@@ -84,6 +87,8 @@ GEM
     rexml (3.2.5)
     rouge (4.0.1)
     safe_yaml (1.0.5)
+    sass-embedded (1.57.1-x86_64-darwin)
+      google-protobuf (~> 3.21)
     sass-embedded (1.57.1-x86_64-linux-gnu)
       google-protobuf (~> 3.21)
     terminal-table (3.0.2)
@@ -101,6 +106,7 @@ GEM
     yell (2.2.2)
 
 PLATFORMS
+  x86_64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
