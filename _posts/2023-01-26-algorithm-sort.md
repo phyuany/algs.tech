@@ -2,12 +2,12 @@
 title: 算法学习基础-排序问题
 author: jiker
 date: 2023-01-26 13:27:00 +0800
-categories: [算法]
+categories: [数据结构与算法]
 tags: []
 pin: true
 ---
 
-> 此博客参考以下内容 [https://www.bilibili.com/video/av46648286](https://www.bilibili.com/video/av46648286)
+> 撰写时间：2019-06-09，整理时间：2023-01-26，此博客参考以下内容 [https://www.bilibili.com/video/av46648286](https://www.bilibili.com/video/av46648286)
 
 ## 一、什么是排序问题？
 
