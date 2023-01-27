@@ -1,10 +1,9 @@
 ---
 title: Android开发中包的定义
-author: jiker
-date: 2023-01-26 01:45:00 +0800
+date: 2023-01-26 01:45:00
 categories: [Android]
-tags: []
-pin: true
+tags: [规范]
+pin: false
 ---
 
 ## 1、概述
