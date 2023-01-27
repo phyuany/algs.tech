@@ -1,10 +1,9 @@
 ---
 title: 算法学习基础-基本概念
-author: jiker
-date: 2023-01-18 13:21:00 +0800
+date: 2023-01-18 13:21:00
 categories: [数据结构与算法]
 tags: []
-pin: true
+pin: false
 ---
 
 ## 一、概述

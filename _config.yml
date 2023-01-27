@@ -42,7 +42,7 @@ social:
   email: phy.xyz@foxmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://www.jkdev.cn      # change to your twitter homepage
+    - https://jiker.dev      # change to your twitter homepage
     - https://space.bilibili.com/172353353       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
