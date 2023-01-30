@@ -2,7 +2,7 @@
 title: 怎样给网卡的IP地址设置别名
 date: 2023-01-31 00:49:00 +0800
 categories: [技巧]
-tags: [vue]
+tags: []
 pin: false
 ---
 
