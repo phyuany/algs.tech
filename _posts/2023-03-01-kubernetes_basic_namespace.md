@@ -1,7 +1,7 @@
 ---
 title: k8s名称空间
 date: 2023-02-01 20:07:00 +0800
-categories: [k8s]
+categories: [kubernetes]
 tags: []
 pin: false
 ---

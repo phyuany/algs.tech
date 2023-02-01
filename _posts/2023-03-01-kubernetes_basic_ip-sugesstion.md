@@ -1,7 +1,7 @@
 ---
 title: k8s集群IP网段规划建议
 date: 2023-02-01 20:13:00 +0800
-categories: [k8s]
+categories: [kubernetes]
 tags: []
 pin: false
 ---

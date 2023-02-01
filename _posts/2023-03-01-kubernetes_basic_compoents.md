@@ -1,7 +1,7 @@
 ---
 title: k8s中的核心组件
 date: 2023-02-01 20:05:00 +0800
-categories: [k8s]
+categories: [kubernetes]
 tags: []
 pin: false
 ---

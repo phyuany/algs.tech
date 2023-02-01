@@ -1,7 +1,7 @@
 ---
 title: k8s集群中pod的相关操作
 date: 2023-02-01 20:08:00 +0800
-categories: [k8s]
+categories: [kubernetes]
 tags: []
 pin: false
 ---

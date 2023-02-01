@@ -1,7 +1,7 @@
 ---
 title: k8s资源清单文件
 date: 2023-02-01 20:06:00 +0800
-categories: [k8s]
+categories: [kubernetes]
 tags: []
 pin: false
 ---

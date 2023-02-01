@@ -1,7 +1,7 @@
 ---
 title: 使用kubeadm快速搭建k8s集群
 date: 2023-02-01 19:59:00 +0800
-categories: [k8s]
+categories: [kubernetes]
 tags: []
 pin: false
 ---
