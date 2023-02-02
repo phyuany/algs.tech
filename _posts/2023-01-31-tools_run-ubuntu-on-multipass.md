@@ -2,7 +2,7 @@
 title: 怎样使用Multipass快速创建和管理Ubuntu虚拟机？
 date: 2023-01-31 21:40:00 +0800
 categories: [工具]
-tags: [虚拟机 multipass ubuntu]
+tags: [虚拟机]
 pin: false
 ---
 

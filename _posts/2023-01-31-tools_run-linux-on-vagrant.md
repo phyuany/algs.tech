@@ -2,7 +2,7 @@
 title: 怎样使用Vagrant在命令行终端命上管理Linux虚拟机？
 date: 2023-01-31 21:41:00 +0800
 categories: [工具]
-tags: [虚拟机 vagrant]
+tags: [虚拟机]
 pin: false
 ---
 

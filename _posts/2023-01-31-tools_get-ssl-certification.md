@@ -2,7 +2,7 @@
 title: "Let's Encrypt免费SSL通配证书的申请与续期方法"
 date: 2023-01-31 21:33:00 +0800
 categories: [工具]
-tags: [ssl https]
+tags: [https]
 pin: false
 ---
 
