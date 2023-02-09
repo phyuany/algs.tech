@@ -18,9 +18,7 @@ src="https://github-readme-stats.vercel.app/api?username=jikerdev&show_icons=tru
 - 👯 B站: <https://space.bilibili.com/172353353>
 - 💬 微信公众号:
 
-<img src="/img/about/wechat.jpg" height="35%">
-
-![phy-xyz](/img/about/wechat.jpg)
+<img src="/img/about/wechat.jpg" height="100">
 
 <!--
 **kotlindev/kotlindev** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
