@@ -10,7 +10,7 @@ src="https://github-readme-stats.vercel.app/api?username=jikerdev&show_icons=tru
 
 后端，热爱的技术包括：rust、C++、Linux、Android、Kubernetes等。
 
-活跃平台
+活跃平台：
 
 - 🔭 码云: <https://gitee.com/kotlindev>
 - 🤔 腾讯云社区: <https://cloud.tencent.com/developer/user/1042179>
