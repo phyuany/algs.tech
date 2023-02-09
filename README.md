@@ -12,12 +12,13 @@ src="https://github-readme-stats.vercel.app/api?username=jikerdev&show_icons=tru
 
 你可以在以下平台找到我
 
-- 📫 个人网站: <https://jiker.dev>
+- 📫 极客: <https://jiker.dev>
 - 🔭 码云: <https://gitee.com/kotlindev>
 - 🤔 腾讯云社区: <https://cloud.tencent.com/developer/user/1042179>
-- 😄 博客: <https://blog.jkdev.cn>
 - 👯 B站: <https://space.bilibili.com/172353353>
 - 💬 微信公众号:
+
+<img src="/img/about/wechat.jpg" height="35%">
 
 ![phy-xyz](/img/about/wechat.jpg)
 
