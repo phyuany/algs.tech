@@ -8,11 +8,10 @@ src="https://github-readme-stats.vercel.app/api/top-langs/?username=jikerdev&sho
 <img align="right"
 src="https://github-readme-stats.vercel.app/api?username=jikerdev&show_icons=true&icon_color=0366d6&text_color=24292e&bg_color=ffffff">
 
-一枚后端码农，热爱的技术包括：rust、C++、Linux、Android、Kubernetes等。
+后端，热爱的技术包括：rust、C++、Linux、Android、Kubernetes等。
 
-你可以在以下平台找到我
+活跃平台
 
-- 📫 博客: <https://jiker.dev>
 - 🔭 码云: <https://gitee.com/kotlindev>
 - 🤔 腾讯云社区: <https://cloud.tencent.com/developer/user/1042179>
 - 👯 B站: <https://space.bilibili.com/172353353>
