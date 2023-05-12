@@ -4,30 +4,27 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-## 一、相关链接
+## 一、自我介绍
 
-1.极客开发者: [https://jiker.dev](https://jiker.dev)
+(1)昵称：`潘哥`（不知何时开始有人这么叫，现在很多人这么叫）、`Peter Pan`（一个英语特棒的朋友推荐的英文名）
 
-2.Github: [https://github.com/jikerdev](https://github.com/jikerdev)
+(2)自我描述：喜欢骑自行车，爱好跑步、游泳，喜欢拍摄风景。互联网应用后端开发者，热爱分享，做有意义的事，为社会奉献！
 
-3.哔哩哔哩: [https://space.bilibili.com/172353353](https://space.bilibili.com/172353353)
+(3)博客目的：记录工作、学习，以及相关有价值的内容，如果对你有帮助，欢迎分享给更多有需要的人!
 
-感谢关注！
+(4)梦想：成为一名优秀的程序员、为社会做出贡献、为家人创造更好的生活、旅游！
 
-## 二、关于博主
+(5)座右铭：`不要等待机会，而要创造机会！`
 
-### 2.1 自我介绍
+## 二、主要活跃社区
 
-(1)昵称：潘哥
+1.Github: [https://github.com/jikerdev](https://github.com/jikerdev)
 
-(2)自我描述：喜欢自行车，爱好跑步、游泳，喜欢拍摄风景，喜欢与人交流。喜欢互联网开发技术，热爱分享，要做一个为社会奉献的开发者！
+2.哔哩哔哩: [https://space.bilibili.com/172353353](https://space.bilibili.com/172353353)
 
-(3)博客目的：我在日常学习、或者开发工作中遇到的一些问题，或者一些有价值的内容会使用此博客记录下来，
-欢迎大家参考，也望大家指点不足！
+3.Youtube: [https://www.youtube.com/channel/UCOoeIvXoPpuI-YiCBH_BgJw](https://www.youtube.com/channel/UCOoeIvXoPpuI-YiCBH_BgJw)
 
-### 2.2 互动
-
-> 如果相关内容对你有帮助，希望分享给更多有需要的人!
+## 三、互动方式
 
 - 微信公众号：`极客开发者`
 
