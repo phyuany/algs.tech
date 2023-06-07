@@ -97,7 +97,7 @@ comments:
     issue_term:   # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: 'jikerdev/blog'              # <gh-username>/<repo>
+    repo: 'jikerdev/jiker.dev'              # <gh-username>/<repo>
     repo_id: 'R_kgDOIyxhcQ'
     category: 'General'
     category_id: 'DIC_kwDOIyxhcc4CUhya'
