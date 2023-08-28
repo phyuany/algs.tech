@@ -1,6 +1,6 @@
 ---
 title: 在Ubuntu上快速搭建k8s集群
-date: 2023-01-28 14:51:00 +0800
+date: 2023-08-28 13:10:00 +0800
 categories: [容器与虚拟化]
 tags: [k8s]
 pin: false
