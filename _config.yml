@@ -42,7 +42,7 @@ social:
   email: phy.xyz@foxmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://jiker.dev      # change to your twitter homepage
+    - https://zig.fan      # change to your twitter homepage
     - https://space.bilibili.com/172353353       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
@@ -97,7 +97,7 @@ comments:
     issue_term:   # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: 'jikerdev/jiker.dev'              # <gh-username>/<repo>
+    repo: 'zigfan/zig.fan'              # <gh-username>/<repo>
     repo_id: 'R_kgDOIyxhcQ'
     category: 'General'
     category_id: 'DIC_kwDOIyxhcc4CUhya'
