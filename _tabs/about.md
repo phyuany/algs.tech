@@ -6,9 +6,9 @@ order: 4
 
 ## 一、自我介绍
 
-- **昵称**：`潘哥`（不知何时开始有人这么叫，现在很多人这么叫）、`Peter Pan`（一个英语特棒的朋友推荐的英文名）
+- **昵称**：`潘哥`
 
-- **自我描述**：喜欢骑自行车，爱好跑步、游泳，喜欢拍摄风景。互联网应用后端开发者，热爱分享，做有意义的事，为社会奉献！
+- **自我描述**：喜欢骑自行车，爱好跑步、游泳，喜欢拍摄风景。互联网APP后端开发者，热爱分享，做有意义的事，为社会奉献！
 
 - **博客目的**：记录工作、学习，以及相关有价值的内容，如果对你有帮助，欢迎分享给更多有需要的人!
 
@@ -18,7 +18,7 @@ order: 4
 
 ## 二、主要活跃社区
 
-1.Github: [https://github.com/jikerdev](https://github.com/jikerdev)
+1.Github: [https://github.com/zigfan](https://github.com/zigfan)
 
 2.哔哩哔哩: [https://space.bilibili.com/172353353](https://space.bilibili.com/172353353)
 
