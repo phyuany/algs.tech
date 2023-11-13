@@ -1,7 +1,7 @@
 ---
 title: 怎样给Linux服务器添加交换空间
 date: 2023-01-28 00:28:00 +0800
-categories: [计算机操作系统与网络]
+categories: [操作系统与网络]
 tags: [swap]
 pin: false
 ---
