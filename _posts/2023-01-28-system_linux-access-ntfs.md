@@ -1,7 +1,7 @@
 ---
 title: 如何解决双系统中Linux访问不了windows的NTFS分区的问题
 date: 2023-01-28 00:15:00 +0800
-categories: [计算机操作系统与网络]
+categories: [操作系统与网络]
 tags: [双系统]
 pin: false
 ---
