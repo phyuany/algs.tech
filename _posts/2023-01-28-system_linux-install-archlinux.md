@@ -1,7 +1,7 @@
 ---
 title: 怎样安装ArchLinux以及Deepin桌面环境
 date: 2023-01-28 00:29:00 +0800
-categories: [计算机操作系统与网络]
+categories: [操作系统与网络]
 tags: [archlinux]
 pin: false
 ---
