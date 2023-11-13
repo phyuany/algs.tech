@@ -1,7 +1,7 @@
 ---
 title: DNS首选与备用作用机制探究
 date: 2023-01-28 00:30:00 +0800
-# categories: [计算机操作系统与网络]
+categories: [操作系统与网络]
 tags: [dns]
 pin: false
 ---
