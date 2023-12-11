@@ -27,6 +27,8 @@ cd freetype-2.8.1/
 ./configure --prefix=/usr/local/freetype-2.8.1/
 ```
 
+需要注意的是，以下示例中，需要用到的php源码直接从php官网下载。
+
 ## 二、安装PHP
 
 ### 2.1 PHP 7.2
@@ -121,6 +123,71 @@ make install
   --enable-exif \
   --enable-pcntl \
   --with-readline
+# 编译
+make -j16
+# 安装
+sudo make install
+```
+
+### 2.4 PHP 5.6
+
+`php 5.6` 这个版本相对老，因此有一些依赖库依赖的是旧版本。我在 `Deepin 20.9`上安装时，`curl` 和 `openssl` 这两个依赖库需要安装旧版本，我编译安装了 `curl-7.19.7` 和 `openssl-1.0.2u`。
+
+- 安装 curl
+
+源码下载页面：<https://www.openssl.org/source/old/>
+
+编译与安装命令如下
+
+```shell
+# 编译配置
+./configure --prefix=/usr/local/curl-7.19.7
+# 编译
+make -j
+# 安装
+sudo make install
+```
+
+- 安装 opelssl
+
+源码下载页面：<https://www.openssl.org/source/old/>
+
+编译与安装命令如下
+
+```shell
+# 编译配置
+./config --prefix=/usr/local/openssl-1.0.2u
+# 编译
+make -j
+# 安装
+sudo make install
+```
+
+- 安装 php
+
+```shell
+# 编译
+./configure \
+    --prefix=/usr/local/php-5.6.40 \
+    --with-config-file-path=/usr/local/php-5.6.40/etc \
+    --with-mysql \
+    --with-mysqli \
+    --with-pdo-mysql \
+    --with-zlib \
+    --with-curl=/usr/local/curl-7.19.7 \
+    --with-mcrypt \
+    --with-gd \
+    --with-jpeg-dir \
+    --with-freetype-dir=/usr/local/freetype-2.8.1 \
+    --with-openssl=/usr/local/openssl-1.0.2u \
+    --with-mhash \
+    --disable-rpath \
+    --disable-ipv6 \
+    --enable-fpm \
+    --enable-pcntl \
+    --enable-gd-native-ttf \
+    --enable-sockets \
+    --enable-bcmath
 # 编译
 make -j16
 # 安装
