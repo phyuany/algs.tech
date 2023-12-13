@@ -193,3 +193,38 @@ make -j16
 # 安装
 sudo make install
 ```
+
+### 2.3 PHP 8.3
+
+```shell
+# 编译配置
+./configure --prefix=/usr/local/php-8.3.0 \
+  --with-config-file-path=/usr/local/php-8.3.0/etc \
+  --with-zlib \
+  --with-zip \
+  --with-pdo-mysql=mysqlnd \
+  --with-mysqli=mysqlnd \
+  --with-mysqli=mysqlnd \
+  --enable-gd \
+  --with-external-gd \
+  --with-jpeg \
+  --with-xpm \
+  --with-webp \
+  --with-freetype \
+  --with-zlib-dir \
+  --with-bz2 \
+  --with-openssl \
+  --with-curl \
+  --enable-soap \
+  --enable-pcntl \
+  --enable-mbstring \
+  --enable-sockets \
+  --enable-exif \
+  --enable-pcntl \
+  --enable-fpm \
+  --with-readline
+# 编译
+make -j4
+# 安装
+sudo make install
+```
