@@ -194,7 +194,7 @@ make -j16
 sudo make install
 ```
 
-### 2.3 PHP 8.3
+### 2.5 PHP 8.3
 
 ```shell
 # 编译配置
