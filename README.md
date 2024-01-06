@@ -4,4 +4,4 @@
 
 我决定，从此维护此 开源博客
 
-旧版博客（不再更新）：<https://blog.jkdev.cn>
+博客网址：<https://webcoding.tech>
