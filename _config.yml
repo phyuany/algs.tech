@@ -30,7 +30,7 @@ description: >-                        # used by seo meta and the atom feed
 url: 'https://webcoding.tech'
 
 github:
-  username: phyxyz             # change to your github username
+  username: phyuany             # change to your github username
 
 twitter:
   username: phy_xyz            # change to your twitter username
@@ -97,7 +97,7 @@ comments:
     issue_term:   # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: 'zigfan/ucoding.net'              # <gh-username>/<repo>
+    repo: 'phyuany/webcoding.tech'              # <gh-username>/<repo>
     repo_id: 'R_kgDOIyxhcQ'
     category: 'General'
     category_id: 'DIC_kwDOIyxhcc4CUhya'
