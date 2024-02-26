@@ -6,11 +6,11 @@ tags: []
 pin: false
 ---
 
-## 一、准备
+## 一、准备ADB
 
 首先需要 `adb (Android Debug Bridge)` 工具包，如果电脑有安装 Android SDK，`adb` 工具在 `platform-tools` 目录下，需要将 `platform-tools` 目录添加到 `PATH` 环境变量中即可。
 
-如果电脑上没有安装过 Android SDK，可以到官网下载对应操作系统的独立 `platform-tools` 工具包即可，下载到本机之后解压到本机任意目录下，然后将解压后的目录添加到 `PATH` 环境变量中即可。
+如果电脑上没有安装过 Android SDK，可以到官网下载对应操作系统的独立 `platform-tools` 工具包，下载到本机之后解压到本机任意目录下，同时将对应目录添加到 `PATH` 环境变量中。
 
 > `platform-tools` 工具包下载网页地址: <https://developer.android.google.cn/tools/releases/platform-tools?hl=zh-cn#downloads>
 
@@ -26,15 +26,15 @@ pin: false
 
 再进入开发者选项，打开 `USB debugging` 选项，如下图
 
-![20240226174722.png](/img/android/20240226174722.png)
+![20240226181905.png](/img/android/20240226181905.png)
 
 最后，用数据线将手机链接到电脑上，使用 `adb shell` 命令进入 Android Shell 环境，如果没有正常进入 Shell 环境，可以使用 `adb devices` 命令查看是否连接成功。
 
 在以上操作过程中，如果电脑是第一次使用 `adb` 连接手机，电脑上会弹出一个提示框，选择 `允许`，即可完成设置，如下图：
 
-![20240226173010.png](img/20240226173010.png)
+![20240226174722.png](/img/android/20240226174722.png)
 
-## 三、使用 adb 实现点击屏幕功能
+## 三、使用ADB实现点击屏幕功能
 
 我们可以使用 `adb shell input tap X Y` 命令实现点击屏幕的功能，其中 `X` 和 `Y` 分别为点击屏幕的坐标。我们需要提前预判出点击屏幕的坐标，例如在分辨率为 1080x1920 的手机上，点击屏幕的中心点，坐标为 `540 960`，则可以使用 `adb shell input tap 540 960` 命令实现点击屏幕的功能。
 
