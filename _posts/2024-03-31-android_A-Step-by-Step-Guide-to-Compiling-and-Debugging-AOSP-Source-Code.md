@@ -8,10 +8,13 @@ pin: false
 
 ## 一、下载AOSP源码
 
+基于 `AOSP` 的开发推荐在 `Ubuntu 20.04 LTS` 下进行，因此你电脑最优选择是 `Ubuntu` 系统。如果不选择 `Ubuntu` 系统，也可以使用 `Deepin`、`Debian` 等环境相似的系统。假设你对`AOSP` 有一定的了解，但还没有真正实践，这篇文章很适合你。
+
 如果你电脑没有repo工具需要先安装 `repo` 工具，命令如下
 
 ```shell
 mkdir ~/bin
+# 使用tuna镜像下载repo
 curl https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -o ~/bin/repo
 chmod +x ~/bin/repo
 # 以下这条命令可以添加到 `~/.bashrc` 文件中
