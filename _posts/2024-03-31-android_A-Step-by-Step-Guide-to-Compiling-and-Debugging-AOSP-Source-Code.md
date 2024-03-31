@@ -8,6 +8,12 @@ pin: false
 
 ## 一、下载AOSP源码
 
+在开始之前，我们先安装编译AOSP需要的一些系统基本依赖，如下命令
+
+```shell
+sudo apt-get install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache libgl1-mesa-dev libxml2-utils xsltproc unzip
+```
+
 基于 `AOSP` 的开发推荐在 `Ubuntu 20.04 LTS` 下进行，因此你电脑最优选择是 `Ubuntu` 系统。如果不选择 `Ubuntu` 系统，也可以使用 `Deepin`、`Debian` 等环境相似的系统。假设你对`AOSP` 有一定的了解，但还没有真正实践，这篇文章很适合你。
 
 如果你电脑没有repo工具需要先安装 `repo` 工具，命令如下
