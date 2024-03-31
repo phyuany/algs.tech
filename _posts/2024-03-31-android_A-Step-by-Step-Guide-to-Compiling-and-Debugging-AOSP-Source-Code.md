@@ -102,7 +102,7 @@ emulator
 
 ## 四、使用ASFP打开AOSP的子模块
 
-我们先介绍 `ASFP`，它是 `Android Studio for Platform` 的简称，谷歌官方提供了该工具，可以方便的进行基于 `AOSP` 的开发。如果你电脑上还没有安装 `ASFP`，可以到 [https://developer.android.google.cn/studio/platform](https://developer.android.google.cn/studio/platform) 下载安装。
+我们先介绍 `ASFP`，它是 `Android Studio for Platform` 的简称，谷歌官方提供了该工具，可以方便的进行基于 `AOSP` 的开发。如果你电脑上还没有安装 `ASFP`，可以到 [https://developer.android.google.cn/studio/platform?hl=en](https://developer.android.google.cn/studio/platform?hl=en) 下载安装。
 
 这里我们要打开 `Setting` （系统设置APP）源代码并进行调试，步骤如下：
 
