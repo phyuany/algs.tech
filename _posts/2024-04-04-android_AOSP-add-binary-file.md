@@ -1,5 +1,5 @@
 ---
-title: 在AOSP源码添加二进制可执行程序
+title: 在AOSP中添加二进制可执行程序
 date: 2024-04-04 15:23:00 +0800
 categories: [Android]
 tags: []
