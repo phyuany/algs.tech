@@ -26,7 +26,7 @@ pin: false
 
 产品厂商最终写的代码，大多会写到`/product`和`/odm`分区。
 
-## 二、在系统源码添加C++可执行程序
+## 二、添加C++源码
 
 ### 2.1 添加源代码文件
 
@@ -60,7 +60,7 @@ cc_binary {
 # 执行初始化
 source build/envsetup.sh
 # 选择编译目标
-lunch rice14
+lunch rice14-eng
 # 进入源码目录
 cd device/jelly/rice14/helloworld/
 # 执行编译
@@ -103,7 +103,7 @@ PRODUCT_MODEL := AOSP on x86_64
 # 执行初始化
 source build/envsetup.sh
 # 选择编译目标
-lunch rice14
+lunch rice14-eng
 # 编译
 m
 ```
@@ -158,7 +158,7 @@ out/host/linux-x86/bin/sgdisk --clear out/target/product/generic_x86_64/system-q
 
 如果我们一定要将二进制程序添加到system分区，则需要在`Android.bp`中添加`product_specific: false`，同时需要在`rice14.mk`中通过`PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST`变量设置白名单。
 
-## 三、添加可执行文件到系统源码中
+## 三、添加可执行文件
 
 ### 3.1 准备二进制可执行文件
 
@@ -193,7 +193,7 @@ PRODUCT_PACKAGES += helloworld \
 
 ```shell
 source build/envsetup.sh
-lunch rice14
+lunch rice14-eng
 m
 ```
 
@@ -202,3 +202,112 @@ m
 ![20240404170257](img/20240404170257.jpg)
 
 结果如图所示则代表操作成功。
+
+## 四、添加Java源码
+
+### 4.1 准备Java源码
+
+在product目录新增一个`hellojava`目录，首先建包的路径`tech.webcoding.main`，使用以下命令创建目录
+
+```shell
+mkdir -p device/jelly/rice14/hellojava/tech/webcoding/main
+```
+
+在`tech.webcoding.main`目录下新建一个`HelloJava.java`文件，内容如下：
+
+```java
+package tech.webcoding.main;
+
+public class HelloJava {
+    public static void main(String[] args) {
+        System.out.println("Hello Java");
+    }
+}
+```
+
+另外添加`Android.bp`文件，内容如下
+
+```bp
+java_library {
+    name: "hellojava",
+    installable: true,
+    product_specific: true,
+    srcs: ["**/*.java"],
+    sdk_version: "current"
+}
+```
+
+需要注意的是，如果不指定`installable: true`，那么编译产物都是`.class`文件，这种文件在Android无法直接运行。最后需要在`rice14.mk`中添加如下代码：
+
+```shell
+PRODUCT_PACKAGES += helloworld \
+    busybox \
+    hellojava
+```
+
+### 4.2 执行编译并验证
+
+接着执行编译
+
+```shell
+source build/envsetup.sh
+lunch rice14-eng
+m
+```
+
+编译完成之后运行模拟器，并使用`adb shell`打开终端，查看`product/framework/`目录下是否存在`hellojava.jar`，如果存在则执行以下命令
+
+```shell
+# 配置 classpath
+export CLASSPATH=/product/framework/hellojava.jar
+# 执行程序
+app_process /product/framework/ tech.webcoding.main.HelloJava
+```
+
+正常输出结果代表操作成功。
+
+## 五、添加Jar包
+
+在product目录新增一个`hellojavajar`目录，我们直接把第四步编译出的`hellojava.jar`拷贝到`hellojavajar`目录下，如下命令
+
+```shell
+cp out/target/product/generic_x86_64/system/product/framework/hellojava.jar device/jelly/rice14/hellojavajar/
+```
+
+然后添加`Android.bp`文件，内容如下：
+
+```shell
+java_import {
+    name: "hellojavajar",
+    installable: true,
+    jars: ["hellojava.jar"],
+    product_specific: true
+}
+```
+
+为了避免冲突，我们需要把第四步的`hellojava`删除掉。再在`rice14.mk`中添加如下代码变更`PRODUCT_PACKAGES`变量如下
+
+```shell
+PRODUCT_PACKAGES += helloworld \
+    busybox \
+    hellojavajar
+```
+
+再执行编译，命令如下
+
+```shell
+source build/envsetup.sh
+lunch rice14-eng
+m
+```
+
+编译完成后，重新启动模拟器，再使用`adb shell`打开终端，查看`product/framework/`目录下是否存在`hellojavajar.jar`，如果存在则执行以下命令
+
+```shell
+# 配置 classpath
+export CLASSPATH=/product/framework/hellojavajar.jar
+# 执行程序
+app_process /product/framework/ tech.webcoding.main.HelloJava
+```
+
+正常输出结果代表操作成功。
