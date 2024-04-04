@@ -33,7 +33,7 @@ github:
   username: phyuany             # change to your github username
 
 twitter:
-  username: phy_xyz            # change to your twitter username
+  username: phyuany            # change to your twitter username
 
 social:
   # Change to your full name.
@@ -54,7 +54,7 @@ google_site_verification:               # fill in to your verification string
 # The end of `jekyll-seo-tag` settings
 
 google_analytics:
-  id: 'G-HY3KR9JJ0G'  # fill in your Google Analytics ID
+  id: ''  # fill in your Google Analytics ID
   # Google Analytics pageviews report settings
   pv:
     proxy_endpoint:   # fill in the Google Analytics superProxy endpoint of Google App Engine
