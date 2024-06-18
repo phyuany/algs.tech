@@ -1,5 +1,5 @@
 ---
-title: 使用Pingora构建高效的负载均衡器
+title: Pingora高效负载均衡器的构建指南
 date: 2024-06-18 15:30:00 +0800
 categories: [工具]
 tags: [Pingora]
