@@ -1,18 +1,16 @@
 ---
-title: 构建你的高效负载均衡器：使用 Pingora 的实战指南
+title: 使用Pingora构建高效的负载均衡器
 date: 2024-06-18 15:30:00 +0800
 categories: [工具]
 tags: [Pingora]
 pin: false
 ---
 
-## 一、概述
+## 一、什么是 Pingora？
 
-### 1.1什么是 Pingora？
+`Pingora` 是一个高性能的 `Rust` 库，用于构建负载均衡器和代理服务器。它提供了丰富的功能和高度的扩展性，适用于各种网络应用场景。今天，我带大家一步一步使用 `Rust` 生态中的 `Pingora` 构建一个基础的负载均衡器。
 
-Pingora 是一个高性能的 Rust 库，用于构建负载均衡器和代理服务器。它提供了丰富的功能和高度的扩展性，适用于各种网络应用场景。
-
-今天，我将带大家一步一步使用 Rust 生态中的 Pingora 构建一个基础的负载均衡器。
+![24061901](/img/tools/24061901.jpg)
 
 ## 二、实现过程
 
@@ -192,10 +190,46 @@ cargo run -- -d
 pkill -SIGTERM load_balancer
 ```
 
+### 4.2 配置
+
+Pingora 配置文件可以定义Pingora 如何运行，以下定义了 Pingora 的版本、线程数、pid文件、错误日志文件、升级套接字文件的配置，文件名称命名为`conf.yaml`
+
+```shell
+---
+version: 1
+threads: 2
+pid_file: /tmp/load_balancer.pid
+error_log: /tmp/load_balancer_err.log
+upgrade_sock: /tmp/load_balancer.sock
+```
+
+加载配置文件运行如下：
+
+```shell
+# 设置日志级别
+RUST_LOG=INFO
+# 启用
+cargo run -- -c conf.yaml -d
+```
+
+### 4.3 优雅地升级
+
+假设我们更改了负载均衡器的代码并重新编译了二进制文件。现在我们希望将正在后台运行的服务升级到这个新版本。如果我们简单地停止旧服务，然后启动新服务，那么在中间到达的一些请求可能会丢失。幸运的是，Pingora 提供了一种优雅的方式来升级服务。
+
+首先，我们通过`SIGQUIT`停止正在运行的服务，然后使用`-u`或者`--upgrade`参数来启动全新的程序，如下命令
+
+```shell
+pkill -SIGQUIT load_balancer && RUST_LOG=INFO cargo run -- -c conf.yaml -d -u
+```
+
+在升级过程中，Pingora 将会自动将请求路由到新的服务，而不会丢失任何请求。从客户端的角度来看，用户感觉不到任何变化。
+
 ## 五、总结
 
-通过以上步骤，我们成功构建了一个基础的负载均衡器，并且支持 HTTP 和 HTTPS 请求。Pingora 提供的功能让我们可以轻松地构建高效的负载均衡器，提升系统的稳定性和响应速度。
+到此为止，我们已经拥有了一个功能完备的负载均衡器。通过这个简单的示例，相信大家已经对 Pingora 有了一个初步的了解。
 
-到此为止，我们已经拥有了一个功能完备的负载均衡器。不过，这是一个非常基础的负载均衡器。在实际应用中，负载均衡器的配置和功能可能会更加复杂，我们还需要了解如何使用一些内置的 pingora 工具使其更加健壮。
+不过，这是一个非常基础的负载均衡器。在实际应用中，负载均衡器的配置和功能可能会更加复杂，我们还需要根据实际需求来进行扩展和优化。
 
-但是通过这个简单的示例，相信大家已经对 Pingora 有了一个初步的了解。希望这篇文章对你有所帮助！
+在后续，我也会分享一些关于 Pingora 以及新兴热门技术的更多内容，欢迎继续关注！
+
+> 本文完整示例代码：<https://github.com/phyuany/simple-pingora-reverse-proxy>
