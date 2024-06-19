@@ -39,20 +39,29 @@ use pingora::{prelude::*, services::Service};
 use std::sync::Arc;
 
 fn main() {
-    // 创建一个服务器实例，参数为None表示使用默认配置
-    let mut my_server = Server::new(None).unwrap();
+    // 创建一个服务器实例，传入Some(Opt::default())代表使用默认配置，程序执行时支持接收命令行参数
+    let mut my_server = Server::new(Some(Opt::default())).unwrap();
     // 初始化服务器
     my_server.bootstrap();
-    // 创建一个负载均衡器，包含两个上游服务器
-    let upstreams = LoadBalancer::try_from_iter(["10.0.0.1:8080", "10.0.0.2:8080"]).unwrap();
-    // 创建一个HTTP代理服务，并传入服务器配置和负载均衡器，这里的负载均衡器实现了ProxyHttp trait
+    // 创建一个负载均衡器，包含多个上游服务器
+    let mut upstreams = LoadBalancer::try_from_iter(["10.0.0.1:8080", "10.0.0.2:8080", "10.0.0.3:8080"]).unwrap();
+
+    // 进行健康检查，最终获得到可用的上游服务器
+    let hc = TcpHealthCheck::new();
+    upstreams.set_health_check(hc);
+    upstreams.health_check_frequency = Some(std::time::Duration::from_secs(1));
+    let background = background_service("health check", upstreams);
+    let upstreams = background.task();
+
+    // 创建一个HTTP代理服务，并传入服务器配置和负载均衡器
     let mut lb_service: pingora::services::listening::Service<pingora::proxy::HttpProxy<LB>> =
-        http_proxy_service(&my_server.configuration, LB(Arc::new(upstreams)));
-    
+        http_proxy_service(&my_server.configuration, LB(upstreams));
     // 添加一个TCP监听地址，监听80端口
     lb_service.add_tcp("0.0.0.0:80");
 
-    // 在项目目录下新增一个 keys 目录，对应证书文件放在该目录下。最后添加一个TLS监听地址，监听443端口
+    // 添加一个TLS监听地址，监听443端口
+    println!("The cargo manifest dir is: {}", env!("CARGO_MANIFEST_DIR"));
+    // 在项目目录下新增一个 keys 目录，对应证书文件放在该目录下
     let cert_path = format!("{}/keys/example.com.crt", env!("CARGO_MANIFEST_DIR"));
     let key_path = format!("{}/keys/example.com.key", env!("CARGO_MANIFEST_DIR"));
     let mut tls_settings =
@@ -60,21 +69,20 @@ fn main() {
     tls_settings.enable_h2();
     lb_service.add_tls_with_settings("0.0.0.0:443", None, tls_settings);
 
-    // 定义服务列表，可以添加多个服务，这个示例只有一个负载均衡服务。将服务列表添加到服务器中
+    // 定义服务列表，这个示例只有一个负载均衡服务，后续有需要可以添加更多，将服务列表添加到服务器中
     let services: Vec<Box<dyn Service>> = vec![Box::new(lb_service)];
     my_server.add_services(services);
-
     // 运行服务器，进入事件循环
     my_server.run_forever();
 }
 
-// 定义一个包含负载均衡器的结构体LB，用于包装Arc指针以实现多线程共享。
+// 定义一个包含负载均衡器的结构体LB，用于包装Arc指针以实现多线程共享
 pub struct LB(Arc<LoadBalancer<RoundRobin>>);
 
 // 使用#[async_trait]宏，异步实现ProxyHttp trait。
 #[async_trait]
 impl ProxyHttp for LB {
-    /// 定义上下文类型，这里使用空元组。对于这个小例子，我们不需要上下文存储
+    /// 定义上下文类型，这里使用空元组，对于这个小例子，我们不需要上下文存储
     type CTX = ();
     // 创建新的上下文实例，这里返回空元组
     fn new_ctx(&self) -> () {
@@ -94,7 +102,7 @@ impl ProxyHttp for LB {
         Ok(peer)
     }
 
-    // 在上游请求发送前，执行一些额外操作，例如将某些参数插入请求头。这里的示例是插入Host头部
+    // 在上游请求发送前，执行一些额外操作，例如将某些参数插入请求头，这里的示例是插入Host头部
     async fn upstream_request_filter(
         &self,
         _session: &mut Session,
@@ -112,17 +120,16 @@ impl ProxyHttp for LB {
 
 在以上的代码中，我们首先创建了一个服务器实例，然后初始化服务器，创建负载均衡器结构体 `LB` 并实现了 `ProxyHttp trait`。任何实现了 `ProxyHttp trait` 的对象本质上定义了代理中如何处理请求。`ProxyHttp trait` 中必须需要的方法是 `upstream_peer()`，它返回请求应该被代理到的地址。`LB` 结构体对象监听了80端口和443端口，这两个端口分别用于HTTP和HTTPS请求。
 
-## 三、代码优化
-
-以上代码实现了需求，但是代码存在一些优化空间。`Pingora` 提供了一些有用的功能，只需调用对应的代码就可以启用。下面我们对以上代码进行优化：
+## 三、代码解析
 
 ### 3.1 对等体健康检查
 
-为了使我们的负载均衡器更可靠，我们希望添加健康检查功能到我们的上游对等体。这样，如果有一个对等体已经出现异常，就可以快速停止将流量路由到该对等体。我们先添加包含已宕机的对等体，如下代码
+为了使我们的负载均衡器更可靠，我们添加了健康检查功能到我们的上游对等体。这样，如果有一个对等体已经出现异常，就可以快速停止将流量路由到该对等体。如下代码
 
 ```rust
 fn main() {
     // ...
+    // 以下对等体中包含一个异常的对等体
     let upstreams =
         LoadBalancer::try_from_iter(["10.0.0.1:8080", "10.0.0.2:8080", "10.0.0.3:8080"]).unwrap();
     // ...
@@ -135,31 +142,24 @@ fn main() {
 curl http://127.0.0.1 -svo /dev/null
 ```
 
-我们发现会出现 `502: Bad Gateway` 的失败情况，这是因为我们的对等体选择严格遵循我们给出的 `RoundRobin` 选择模式，而没有考虑该对等体是否健康。我们可以通过引入一个健康检查的功能来解决这个问题，进而排除掉不健康对等体。
+如果去掉健康检查的代码片段，我们发现会出现 `502: Bad Gateway` 的失败情况，这是因为我们的对等体选择严格遵循我们给出的 `RoundRobin` 选择模式，而没有考虑该对等体是否健康。通过引入一个健康检查的功能来解决这个问题，进而排除掉不健康对等体。关键代码如下
 
 ```rust
 fn main() {
     // ...
-    // 创建一个负载均衡器的上游对等体列表
-    let mut upstreams = LoadBalancer::try_from_iter(["10.0.0.1:8080", "10.0.0.2:8080"]).unwrap();
-
     // 健康检查
     let hc = TcpHealthCheck::new();
     upstreams.set_health_check(hc);
     upstreams.health_check_frequency = Some(std::time::Duration::from_secs(1));
     let background = background_service("health check", upstreams);
     let upstreams = background.task();
-
-    // 创建一个HTTP代理服务，并传入服务器配置和负载均衡器
-    let mut lb_service: pingora::services::listening::Service<pingora::proxy::HttpProxy<LB>> =
-        http_proxy_service(&my_server.configuration, LB(upstreams));
     // ...
 }
 ```
 
 ### 3.2 接收命令行参数
 
-在创建 `pingora` 服务时，需要传入一个 `Opt::default()` 参数，`pingora` 将会捕获我们运行的命令行参数，并使用这些参数来配置 `pingora` 服务。代码变更如下
+在创建 `pingora` 服务时，传入了一个 `Some(Opt::default())` 参数，`pingora` 将会捕获我们运行的命令行参数，并使用这些参数来配置 `pingora` 服务。代码变更如下
 
 ```rust
 fn main() {
@@ -169,7 +169,7 @@ fn main() {
 }
 ```
 
-代码变更完成后，我们可以通过以下命令来看 `pingora` 负载均衡器的参数说明
+我们可以通过以下命令来看 `pingora` 负载均衡器的参数说明
 
 ```shell
 cargo run -- -h
@@ -184,8 +184,8 @@ cargo run -- -h
 通过传递 `-d` 或者 `--daemon` 参数，可以将 `pingora` 运行在后台。如果要优雅的停止 `pingora`，可以使用 `pkill` 命令并且传递 `SIGTERM` 信号，那么在关闭的过程中，服务将停止接收新的请求，但是仍然会处理完当前请求再退出。命令如下
 
 ```shell
-# 后台运行
-cargo run -- -d
+# 后台运行，我们使用release模式，因为debug模式下会生成调试信息，会影响性能
+cargo run --release -- -d
 # 优雅的停止
 pkill -SIGTERM load_balancer
 ```
@@ -209,17 +209,17 @@ upgrade_sock: /tmp/load_balancer.sock
 # 设置日志级别
 RUST_LOG=INFO
 # 启用
-cargo run -- -c conf.yaml -d
+cargo run --release -- -c conf.yaml -d
 ```
 
 ### 4.3 优雅地升级
 
-假设我们更改了负载均衡器的代码并重新编译了二进制文件。现在我们希望将正在后台运行的服务升级到这个新版本。如果我们简单地停止旧服务，然后启动新服务，那么在中间到达的一些请求可能会丢失。幸运的是，Pingora 提供了一种优雅的方式来升级服务。
+假设我们更改了负载均衡器的代码并重新编译了二进制文件，现在我们希望将正在后台运行的服务升级到这个新版本。如果我们简单地停止旧服务，然后启动新服务，那么在中间到达的一些请求可能会丢失。幸运的是，Pingora 提供了一种优雅的方式来升级服务。
 
 首先，我们通过`SIGQUIT`停止正在运行的服务，然后使用`-u`或者`--upgrade`参数来启动全新的程序，如下命令
 
 ```shell
-pkill -SIGQUIT load_balancer && RUST_LOG=INFO cargo run -- -c conf.yaml -d -u
+pkill -SIGQUIT load_balancer && RUST_LOG=INFO cargo run --release -- -c conf.yaml -d -u
 ```
 
 在升级过程中，Pingora 将会自动将请求路由到新的服务，而不会丢失任何请求。从客户端的角度来看，用户感觉不到任何变化。
