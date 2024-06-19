@@ -6,11 +6,9 @@ tags: [Pingora]
 pin: false
 ---
 
-`Pingora` 是一个高性能的 `Rust` 库，用于构建负载均衡器和代理服务器。它提供了丰富的功能和高度的扩展性，适用于各种网络应用场景。本文将带您一步步使用 `Pingora` 构建一个基础的负载均衡器。
-
 ![24061901](/img/tools/24061901.jpg)
 
-### 目录
+## 目录
 
 1. 什么是Pingora？
 2. 实现过程
@@ -22,9 +20,11 @@ pin: false
 
 ## 1. 什么是Pingora？
 
-`Pingora` 是一个用Rust语言编写的高性能负载均代理工具库。其高效的性能、易于扩展的设计以及Rust语言本身的安全性和速度。使得`Pingora` 能够处理大量并发请求，确保高可靠性和稳定性。
+`Pingora` 是一个高性能的 `Rust` 库，用于构建可负载均衡器的代理服务器，它的诞生是为了弥补 `Nginx` 存在的缺陷。
 
-如果你还没阅读过我上一篇文章，建议先阅读：[《一天为用户节省434年握手时间！Rust编写的Pingora凭什么力压Nginx？》](https://webcoding.tech/posts/tools_what-is-pingora.html)<https://webcoding.tech/posts/tools_what-is-pingora.html>
+`Pingora` 提供了丰富的功能和高度的扩展性，适用于各种网络应用场景。其高效的性能、易于扩展的设计以及 `Rust` 语言本身的安全性和速度。使得 `Pingora`  能够处理大量并发请求，确保高可靠性和稳定性。本文将带您一步步使用 `Pingora` 构建一个基础的负载均衡器。
+
+如果你还不了解 `Pingora`  的相关背景， 建议先阅读：[《一天为用户节省434年握手时间！Rust编写的Pingora凭什么力压Nginx？》](https://webcoding.tech/posts/tools_what-is-pingora.html)
 
 ## 2. 实现过程
 
