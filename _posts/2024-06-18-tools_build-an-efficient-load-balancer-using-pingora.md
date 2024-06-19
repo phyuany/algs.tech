@@ -22,7 +22,9 @@ pin: false
 
 ## 1. 什么是Pingora？
 
-`Pingora` 是一个用Rust语言编写的高性能负载均衡器库。选择Pingora的原因有很多，包括其高效的性能、易于扩展的设计以及Rust语言本身的安全性和速度。在网络应用中，Pingora能够处理大量并发请求，确保高可靠性和稳定性。
+`Pingora` 是一个用Rust语言编写的高性能负载均代理工具库。其高效的性能、易于扩展的设计以及Rust语言本身的安全性和速度。使得`Pingora` 能够处理大量并发请求，确保高可靠性和稳定性。
+
+如果你还没阅读过我上一篇文章，建议先阅读：[《一天为用户节省434年握手时间！Rust编写的Pingora凭什么力压Nginx？》](https://webcoding.tech/posts/tools_what-is-pingora.html)<https://webcoding.tech/posts/tools_what-is-pingora.html>
 
 ## 2. 实现过程
 
