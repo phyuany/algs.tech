@@ -1,7 +1,7 @@
 ---
 title: 解决RTL8723BE网卡Linux上WIFI信号信号差的问题
 date: 2023-01-28 00:26:00 +0800
-categories: [计算操作系统与网络]
+categories: [操作系统与网络]
 tags: []
 pin: false
 ---
