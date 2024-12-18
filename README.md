@@ -1,4 +1,4 @@
-# webcoding.tech - 开源博客
+# algo.tech - 开源博客
 
 ## 一、概述
 
@@ -6,7 +6,7 @@
 
 我决定，从此维护此 开源博客
 
-博客网址：<https://webcoding.tech>
+博客网址：<https://algs.tech>
 
 ## 二、本地运行
 
