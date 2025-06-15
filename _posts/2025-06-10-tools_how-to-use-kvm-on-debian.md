@@ -90,16 +90,20 @@ qemu-img create -f qcow2 /opt/kvm/debian12-base.qcow2 30G
 
 ```shell
 virt-install \
---osinfo=debian11 \
---name=debian12-base \
---virt-type=kvm \
---ram=2048 \
---vcpus=2 \
---cdrom=/opt/kvm/iso/debian-12.11.0-amd64-DVD-1.iso \
---boot=hd \
---disk path=/opt/data/kvm/debian12-base.qcow2 \
---channel unix,path=/var/libvirt/qemu/debian12-base.agent,mode=bind,target_type=virtio,name=org.qemu.guest_agent.0 \
---network network=default \
---graphics vnc,listen=0.0.0.0,port=5900 \
---noautoconsole
+  --name debian12-base \
+  --ram 4096 \
+  --vcpus 2 \
+  --disk path=/opt/kvm/debian12-base.qcow2,size=30 \
+  --os-variant debian11 \
+  --network bridge=virbr0 \
+  --graphics spice \
+  --cdrom /opt/kvm/iso/debian-12.11.0-amd64-DVD-1.iso \
+  --boot hd,cdrom
 ```
+
+- `--ram`: 内存大小（MB）。
+- `--disk`: 虚拟磁盘路径和大小（GB）。
+- `--os-variant`: 通过 `osinfo-query os` 查看支持的系统变体。
+- `--network`: 使用默认的 NAT 网络 virbr0，或替换为其他桥接网络。
+
+--os-variant 是推荐使用的参数，用于为虚拟机启用针对特定操作系统的优化（如时钟设置、磁盘控制器等）。
