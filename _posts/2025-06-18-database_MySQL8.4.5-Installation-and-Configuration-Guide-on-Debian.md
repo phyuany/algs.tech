@@ -218,13 +218,80 @@ sudo /usr/local/mysql/bin/mysql_secure_installation
 
 ### 测试 SQL 命令
 
+首次登录后，需要先修改密码
+
+```sql
+-- 重置 root 密码（将 'your_new_password' 替换为你想要的密码）
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'your_new_password';
+-- 刷新权限
+FLUSH PRIVILEGES;
+```
+
+验证密码重置成功
+
 ```sql
 SELECT version();
 SHOW DATABASES;
 EXIT;
 ```
 
-## 9. 常用管理命令
+## 9. 账号授权
+
+### 开发环境-创建开发账号
+
+如果是开发环境，可以创建一个开发账号，赋予对数据库的创建与增删改查权限
+
+```sql
+-- 创建 develop 用户，允许从任意 IP 访问
+CREATE USER 'develop'@'%' IDENTIFIED BY 'develop_password';
+
+-- 授予 develop 用户创建数据库和全局 DML 权限
+GRANT CREATE, DROP ON *.* TO 'develop'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON *.* TO 'develop'@'%';
+GRANT CREATE ROUTINE, ALTER ROUTINE ON *.* TO 'develop'@'%';
+GRANT INDEX, ALTER ON *.* TO 'develop'@'%';
+GRANT SELECT ON mysql.* TO 'develop'@'%';
+
+-- 刷新权限
+FLUSH PRIVILEGES;
+```
+
+### 生产环境-创建应用账号
+
+如果是在生产环境，一个服务通常拥有对应独立的 mysql 账号，该账号只对此项目的数据库拥有增删改查权限
+
+```sql
+-- 创建 app1 用户，允许从任意 IP 访问  
+CREATE USER 'app1'@'%' IDENTIFIED BY 'app1_password';
+
+-- 确保 app1 数据库存在
+CREATE DATABASE IF NOT EXISTS app1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- 授予 app1 用户对 app1 数据库的权限
+GRANT SELECT, INSERT, UPDATE, DELETE ON app1.* TO 'app1'@'%';
+GRANT CREATE, DROP, INDEX, ALTER ON app1.* TO 'app1'@'%';
+
+-- 刷新权限
+FLUSH PRIVILEGES;
+```
+
+### 创建更安全的账号（推荐）
+
+如果你不需要真正的"任意 IP"访问，建议限制到特定网段
+
+```sql
+-- 创建限制网段的用户（例如：192.168.1.0/24 网段）
+CREATE USER 'app1'@'192.168.1.%' IDENTIFIED BY 'app1_password';
+
+-- 授权
+GRANT SELECT, INSERT, UPDATE, DELETE ON app1.* TO 'app1'@'192.168.1.%';
+GRANT CREATE, DROP, INDEX, ALTER ON app1.* TO 'app1'@'192.168.1.%';
+
+-- 刷新权限
+FLUSH PRIVILEGES;
+```
+
+## 10. 常用管理命令
 
 ### 服务管理
 
@@ -261,7 +328,7 @@ sudo tail -f /var/log/mysql/error.log
 sudo tail -f /var/log/mysql/slow.log
 ```
 
-## 10. 故障排除
+## 11. 故障排除
 
 ### 常见问题
 
