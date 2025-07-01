@@ -1,8 +1,8 @@
 ---
 title: 在Debian上使用安装PostgreSQL数据库
-date: 2023-07-01 11:46:00 +0800
+date: 2025-07-01 11:46:00 +0800
 categories: [关系型数据库]
-tags: []
+tags: [PostgreSQL]
 pin: false
 ---
 
