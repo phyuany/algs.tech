@@ -180,7 +180,27 @@ host    all             develop         0.0.0.0/0               md5
 
 > `0.0.0.0/0` 表示任意 IP，这在开发环境中可以接受，但生产中应避免。
 
----
+#### 🌐 3.2.4 配置 PostgreSQL 监听地址
+
+PostgreSQL 默认只监听 localhost，需要修改配置文件允许外部连接：
+
+```bash
+sudo vim /etc/postgresql/15/main/postgresql.conf
+```
+
+找到 listen_addresses 行，修改为：
+
+```bash
+# 原来可能是：
+# listen_addresses = 'localhost'
+
+# 修改为（开发环境）：
+listen_addresses = '*'
+```
+
+> ⚠️ 安全提醒：listen_addresses = '*' 表示监听所有网络接口，这在开发环境可以接受，但生产环境应该指定具体的 IP 地址。
+
+如果系统启用了防火墙，需要开放 PostgreSQL 端口（默认 5432）。
 
 ### 3.3 **开发环境 - 更安全的账号（限制特定网段）**
 
@@ -204,7 +224,7 @@ GRANT CONNECT ON DATABASE postgres TO devnet;
 host    all             devnet         192.168.0.0/16          md5
 ```
 
-> 只允许 `192.168.x.x` 的机器访问。
+这么配置可实现只允许 `192.168.x.x` 的机器访问。
 
 ### 3.4 生产环境 - 创建应用账号（最小权限原则）
 
@@ -249,7 +269,7 @@ host    app_db          app_user       10.0.0.0/24             md5
 
 > `10.0.0.0/24` 是你生产网络段的 IP，仅允许该网段机器访问。
 
-### 3.5 修改后记得重启 PostgreSQL
+### 3.5 重启 PostgreSQL
 
 ```bash
 sudo systemctl reload postgresql
@@ -268,3 +288,25 @@ sudo systemctl restart postgresql
 | 开发环境 | `develop`  | 任意数据库，创建权限     | 任意 IP (`0.0.0.0/0`) |
 | 安全开发 | `devnet`   | 同上                     | 内网 IP 段            |
 | 生产环境 | `app_user` | 仅访问特定库的特定表权限 | 生产服务网段          |
+
+### 3.6 连接测试
+
+**重启服务后**，可以测试连接是否正常：
+
+```bash
+# 从本地测试
+psql -h localhost -U develop -d postgres
+
+# 从远程测试（替换为实际的服务器 IP）
+psql -h 192.168.0.100 -U develop -d postgres
+```
+
+如果连接失败，检查：
+
+-PostgreSQL 服务是否正常运行：sudo systemctl status postgresql
+-postgresql.conf 中的 listen_addresses 是否正确配置
+-pg_hba.conf 中的访问规则是否正确
+-防火墙是否开放了 5432 端口
+-网络连通性是否正常
+
+> 💡 提示：配置修改后必须重启服务才能生效。
